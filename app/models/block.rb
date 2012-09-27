@@ -5,6 +5,8 @@ class Block < ActiveRecord::Base
   belongs_to :scene
   has_many :attachments, :order => "sequence ASC", :dependent => :destroy
 
+  validates :scene, :presence => true
+
   def insert attachment, after_id = nil
     insert_object attachments, attachment, after_id
   end
