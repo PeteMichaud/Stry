@@ -23,3 +23,4 @@ TODO
 * Cross Browser Testing
 * Unit Test Suite
 * Rich Text Editing in Blocks
+* Provide interface for setting the narrative and gameplay intensity of a scene, and an intensity graph for the story
