@@ -22,4 +22,4 @@ TODO
   cleanly as well
 * Cross Browser Testing
 * Unit Test Suite
-
+* Rich Text Editing in Blocks
