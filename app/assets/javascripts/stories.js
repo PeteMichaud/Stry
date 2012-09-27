@@ -222,7 +222,7 @@ $(document).ready(function(){
                 {
                     $('.block-attachment-list',$block).prepend($attachment_with_controls);
                 }
-
+                activate_jplayer($('.audio-player',$attachment_with_controls));
             }
         });
         return false;
@@ -308,6 +308,9 @@ $(document).ready(function(){
             data_post(this);
         })
 
+    //Audio Attachments
+
+    activate_jplayer($(".audio-player"));
 
     //Helper Functions
 
@@ -522,6 +525,22 @@ $(document).ready(function(){
                 }
             });
         }
+    }
+
+    function activate_jplayer($obj)
+    {
+        var formats_obj = JSON.parse('{ "' + $obj.data('file-format') + '": "' + $obj.data('file-path') + '" }');
+
+        $obj.jPlayer({
+            ready: function () {
+                $obj.jPlayer("setMedia",
+                    formats_obj
+                );
+            },
+            swfPath: "/assets",
+            supplied: $obj.data('file-format'),
+            wmode: "window"
+        });
     }
 
 });
