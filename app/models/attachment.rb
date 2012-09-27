@@ -19,6 +19,8 @@ class Attachment < ActiveRecord::Base
     is_type? %w(mpg mpeg avi flv mov mp4 wmv)
   end
 
+  private
+
   def is_type? legal
     legal.include? File.extname(file.path)[1..4] unless file.path.nil?
   end
