@@ -46,3 +46,4 @@ gem 'thin'
 gem 'bootstrap-wysihtml5-rails'
 gem "paperclip"
 gem 'remotipart'
+gem 'draper'
