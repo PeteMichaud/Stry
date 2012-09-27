@@ -1,0 +1,19 @@
+<%= add_button :block %>
+<li class="<%= block.klass %> block" data-block-id="<%= block.id %>">
+    <div class="column">
+      <a class="delete-block-btn" href="#" title="Delete Block">&times;</a>
+      <div class="sorting-handle"><i class="icon-reorder"></i></div>
+      <textarea class="block-content" name='block[content]'
+                data-post-url='<%= block_path(block) %>'
+                data-dirty="<%= block.content %>"
+                placeholder="Add Content..."><%= block.content %></textarea>
+    </div>
+    <ul class="block-attachment-list">
+      <% block.attachments.each do |attachment| %>
+          <%= render :partial => 'shared/attachment', :locals => { :attachment => attachment } %>
+      <% end %>
+      <li class="add-attachment">
+        <a href="#attachment-modal" role="button" class="attachment-modal-btn" title="Attach New File"><i class="icon-pushpin"></i></a>
+      </li>
+    </ul>
+</li>

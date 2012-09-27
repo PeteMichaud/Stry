@@ -1,0 +1,326 @@
+// Place all the styles related to the stories controller here.
+// They will automatically be included in application.css.
+
+@background_color: #523F2C;
+@lighter_color: #8A6A4A;
+@col_width: 570px;
+@link_color: #08c;
+@column_background: #FFFEF2;
+
+.rounded-corners (@radius: 15px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.add-btn(@border-type: solid) {
+  display:block;
+  height:0;
+  padding:0;
+  height:7px;
+  -webkit-transition: background .5s, border-color .5s;
+  position:relative;
+  background:@column_background;
+  border-bottom:1px @border-type #ddd;
+  z-index:100;
+  .rounded-corners(3px);
+  &:hover {
+    background:@link_color;
+    border-color:@link_color;
+    height:7px;
+    text-decoration:none;
+    text-align:center;
+    &:after {
+      content: attr(title);
+      position:relative;
+      top:-7px;
+      margin:0 auto;
+      padding:5px;
+      border:1px dotted @link_color;
+      text-decoration:none;
+      background: @column_background;
+      color: @link_color;
+      .rounded-corners(6px);
+    }
+  }
+}
+
+.delete-btn {
+  position: absolute;
+  top:10px; right:10px;
+  font-weight:bold;
+  font-size:2em;
+  color:#eee;
+  -webkit-transition: color .25s;
+  &:hover {
+    text-decoration:none;
+    color:@link_color;
+    &:before{
+      content: attr(title);
+      position:relative;
+      top:-2px;
+      left:-5px;
+      text-decoration:none;
+      font-size:14px;
+      font-family: Georgia, serif;
+      background:@column_background;
+      padding:3px;
+    }
+  }
+}
+
+body{
+  background: @background_color;
+}
+
+#story-header {
+  background:@column_background;
+  width:@col_width;
+  padding:15px;
+  margin:0 0 15px 0;
+  position: relative;
+  z-index: 100;
+  .rounded-corners;
+}
+
+#toc, #story-title, h2{
+  font-family: Georgia, serif;
+}
+
+#toc {
+  cursor:move;
+  font-size:16px;
+}
+
+#story-title{
+  font-size: 2em;
+  font-weight: 900;
+  height:45px;
+}
+
+h2{
+  font-size: 1.5em;
+}
+
+textarea{
+  overflow:hidden;
+  border:0;
+  width:90%;
+  box-shadow:none;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  line-height:1.6em;
+  resize: none;
+  background:@column_background;
+  &.scene-notes {
+    border-left:2px solid #e7e7e7;
+    color: #828282;
+    padding:30px 15px 10px 15px;
+    margin:-45px 0 0 0;
+  }
+}
+
+#story-scene-list {
+  .rounded-corners;
+  list-style: none;
+  margin:0;
+  padding:15px;
+  width:@col_width;
+  background:@column_background;
+  -moz-box-shadow: 0px 0px 200px #000, @col_width+15 0px 0px @lighter_color;
+  -webkit-box-shadow: 0px 0px 200px #000, @col_width+15 0px 0px @lighter_color;
+  box-shadow: 0px 0px 200px #000, @col_width+15 0px 0px @lighter_color;
+
+  .add-scene{
+    height:7px;
+    .add-scene-btn{
+      .add-btn;
+    }
+  }
+
+  li.scene {
+    margin:0 0 15px 0;
+    padding:0 15px 15px 15px;
+    position: relative;
+    .delete-scene-btn{
+      .delete-btn;
+    }
+    textarea.scene-title{
+      font-size:1.5em;
+      line-height:2em;
+      height:2em;
+      border:1px solid @column_background;
+      width:90%;
+      display:block;
+      box-shadow:none;
+      padding:5px 0;
+      margin:0 0 5px -15px;
+      font-family: Georgia, serif;
+      font-size: 24px;
+    }
+    .scene-purpose {
+      color: #828282;
+      padding:17px;
+      font-style:italic;
+      font-weight: bold;
+      position: relative;
+      font-family: Georgia, serif;
+      font-size: 16px;
+    }
+    .scene-block-list {
+      list-style:none;
+      margin:15px 0;
+      padding:0;
+      .column {
+        position: relative;
+      }
+      .block {
+        position: relative;
+      }
+      .block-attachment-list{
+        list-style: none;
+        margin: 0 0 0 15px; padding:15px 0 0 0;
+        position: absolute;
+        top: 0; left:@col_width;
+        width:@col_width;
+        border-top:1px dotted lighten(@lighter_color, 15%);
+        .add-attachment {
+          .attachment-modal-btn {
+            color: lighten(@lighter_color, 15%);
+            &:hover {
+              color:@column_background;
+              text-decoration: none;
+              &:after{
+                content: attr(title);
+                position:relative;
+                top:0;
+                left:15px;
+                text-decoration:none;
+                font-style:italic;
+                font-family: Georgia, serif;
+              }
+            }
+          }
+        }
+        li.attachment {
+          position: relative;
+          overflow:auto;
+          margin:0 0 15px 0;
+          a.attachment-thumb {
+            width:300px;
+            padding:5px;
+            .rounded-corners(5px);
+            float:left;
+            background:@column_background;
+            text-align: center;
+          }
+          .delete-attachment-btn{
+            position:absolute;
+            top: 10px;
+            left: 10px;
+            font-weight:bold;
+            font-size:2em;
+            color:#eee;
+            -webkit-transition: color .25s;
+            &:hover {
+              text-decoration:none;
+              color:@link_color;
+            }
+          }
+          .attachment-caption {
+            width:230px;
+            font-size: 14px;
+            font-style: italic;
+            line-height:1.6em;
+            color:@column_background;
+            background:@lighter_color;
+            &::-webkit-input-placeholder {
+              color: lighten(@lighter_color, 15%);
+            }
+            &:-moz-placeholder {
+              color: lighten(@lighter_color, 15%);
+            }
+            &:-ms-input-placeholder {
+              color: lighten(@lighter_color, 15%);
+            }
+          }
+        }
+
+      }
+      .sorting-handle {
+        position: absolute;
+        top:5px; left: 0;
+        width:25px;
+        height:25px;
+        color:#ddd;
+        cursor:move;
+        text-align: center;
+        line-height: 25px;
+        padding:0;
+        margin:0 0 0 -30px;
+      }
+      .delete-block-btn{
+        .delete-btn;
+      }
+      .add-block{
+        height:7px;
+        margin:0 0 1px 0;
+        .add-block-btn {
+          .add-btn(dotted);
+        }
+      }
+      .block-content {
+        margin:0 0 0 15px;
+      }
+      select {
+        -webkit-appearance: button;
+        -webkit-border-radius: 2px;
+        -webkit-padding-end: 20px;
+        -webkit-padding-start: 2px;
+        -webkit-user-select: none;
+        border:0;
+        color: #555;
+        margin: 0;
+        overflow: hidden;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight:bold;
+        font-family: Georgia, serif;
+        font-size: 16px;
+        background: @column_background;
+      }
+
+      .playable {
+        textarea, select {
+          color:#555;
+        }
+      }
+      .notes {
+        textarea, select {
+          color:#777;
+        }
+      }
+      .scripted {
+        textarea, select {
+          color:#006F19;
+        }
+      }
+      .cut_scene {
+        textarea, select {
+          color:#55006F;
+        }
+      }
+    }
+  }
+  li.add-scene {
+    margin:0 0 1px 0;
+    a {
+      color:#ccc;
+    }
+    a:hover {
+      color:#666;
+    }
+  }
+}

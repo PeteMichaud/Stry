@@ -1,0 +1,41 @@
+<div id="story-header">
+  <textarea id="story-title" name='story[title]'
+            data-post-url='<%= story_path(@story) %>'
+            data-dirty="<%= @story.title %>"
+            placeholder="Enter Story Title..."><%= @story.title %></textarea>
+
+    <textarea class="story-description" name='story[description]'
+              data-post-url='<%= story_path(@story) %>'
+              data-dirty="<%= @story.description %>"
+              placeholder="Add Story Description..."><%= @story.description %></textarea>
+
+    <h2>Table of Contents</h2>
+
+    <ol id="toc">
+      <% @story.scenes.each do |scene| %>
+          <li data-scene-id="<%= scene.id %>"><a href="#scene-<%= scene.id %>"><%= scene.title %></a></li>
+      <% end %>
+    </ol>
+</div>
+
+<ul id="story-scene-list" data-story-id="<%= @story.id %>">
+  <% @story.scenes.each do |scene| %>
+    <%= render :partial => 'shared/scene', :locals => { :scene => scene } %>
+  <% end %>
+  <%= add_button :scene %>
+</ul>
+
+<div id="attachment-modal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Attach</h3>
+  </div>
+  <div class="modal-body">
+    <%= render :partial => 'attachments/form' %>
+  </div>
+</div>
+
+<div id="picture-modal" class="modal hide fade">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <img src="" />
+</div>

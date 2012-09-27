@@ -1,0 +1,9 @@
+<div class='control-group<%= " error" if object.errors.has_key?(field_sym) %>'>
+  <%= f.label field_sym, :class => 'control-label' %>
+  <div class='controls'>
+    <%= field_method.call field_sym, :class => 'span12' %>
+    <% if object.errors.has_key?(field_sym) %>
+        <span class='help-inline'><%= resource.errors.get(field_sym).first %></span>
+    <% end %>
+  </div>
+</div>

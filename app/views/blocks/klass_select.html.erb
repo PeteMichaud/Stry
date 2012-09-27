@@ -1,0 +1,5 @@
+<select name="block[klass]" data-post-url="<%= block_path(':block_id') %>">
+  <% @block.column_for_attribute(:klass).limit.each do |klass| %>
+  <option value="<%= klass %>"><%= klass.to_s.titleize %></option>
+  <% end %>
+</select>

@@ -1,0 +1,10 @@
+<%= form_for @attachment, :remote => true do |f| %>
+
+    <%= f.file_field :file %>
+    <%= f.hidden_field :block_id %>
+    <%= hidden_field_tag :previous_attachment %>
+
+    <%= submit_tag 'Attach', :class => 'btn btn-primary' %>
+    <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+
+<% end %>
