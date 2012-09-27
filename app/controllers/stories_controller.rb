@@ -14,6 +14,8 @@ class StoriesController < ApplicationController
   # GET /stories/1.json
   def show
     @attachment = Attachment.new
+    @story = @story.decorator
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @story }
