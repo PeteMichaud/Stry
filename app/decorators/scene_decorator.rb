@@ -1,4 +1,4 @@
-class SceneDecorator < Draper::Base
+class SceneDecorator < ApplicationDecorator
   decorates :scene
   decorates_association :blocks
 
