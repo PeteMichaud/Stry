@@ -5,6 +5,8 @@ class Story < ActiveRecord::Base
   has_many :scenes, :order => "sequence ASC", :dependent => :destroy
   belongs_to :author, :class_name => User
 
+  validates :author, :presence => true
+
   def insert scene, after_id = nil
     insert_object scenes, scene, after_id
   end
