@@ -16,13 +16,14 @@ class ApplicationController < ActionController::Base
     if @@autoload_resource
       begin
         resource_name = controller_name.classify
+        resource_decorator_name = "#{resource_name}Decorator"
         id_sym = load_instance? resource_name
         if id_sym
-          instance_variable_set("@#{resource_name.underscore}", resource_name.constantize.find(params[id_sym]))
+          instance_variable_set("@#{resource_name.underscore}", resource_decorator_name.constantize.find(params[id_sym]))
         elsif build_instance?
-          instance_variable_set("@#{resource_name.underscore}", resource_name.constantize.new)
+          instance_variable_set("@#{resource_name.underscore}", resource_decorator_name.constantize.new)
         elsif load_collection?
-          instance_variable_set("@#{resource_name.underscore.pluralize}", resource_name.constantize.all)
+          instance_variable_set("@#{resource_name.underscore.pluralize}", resource_decorator_name.constantize.all)
         end
       rescue NameError => ex
         #this isn't a controller that we can get a resource for
