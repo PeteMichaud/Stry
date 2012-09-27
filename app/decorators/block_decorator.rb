@@ -1,4 +1,4 @@
-class BlockDecorator < Draper::Base
+class BlockDecorator < ApplicationDecorator
   decorates :block
   decorates_association :attachments
 
