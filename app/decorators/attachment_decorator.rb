@@ -5,7 +5,7 @@ class AttachmentDecorator < Draper::Base
     if model.is_image?
       h.render :partial => 'attachments/types/image', :locals => { :image => file }
     elsif model.is_audio?
-      h.render :partial => 'attachments/types/audio', :locals => { :sound => file }
+      h.render :partial => 'attachments/types/audio', :locals => { :audio => file }
     elsif model.is_video?
       h.render :partial => 'attachments/types/video', :locals => { :video => file }
     else
