@@ -277,9 +277,10 @@ $(document).ready(function(){
             data: null,
             error: error,
             success: function () {
-                $('li[data-scene-id="' + $scene.data('scene-id') + '"]').remove();
+                $scene.prev().remove();
+                $('li[data-scene-id="' + $scene.data('scene-id') + '"]', $toc).remove();
+
                 $scene.slideUp('fast',function(){
-                    $scene.prev().remove();
                     $scene.remove();
                 });
 
