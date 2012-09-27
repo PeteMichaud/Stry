@@ -5,6 +5,8 @@ class Scene < ActiveRecord::Base
   has_many :blocks, :order => "sequence ASC", :dependent => :destroy
   belongs_to :story
 
+  validates :story, :presence => true
+
   def insert block, after_id = nil
     insert_object blocks, block, after_id
   end
