@@ -4,4 +4,7 @@ class Attachment < ActiveRecord::Base
 
   belongs_to :block
 
+  validates :block, :presence => true
+  validates :file, :attachment_presence => true
+
 end
