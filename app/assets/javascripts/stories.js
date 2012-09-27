@@ -303,7 +303,7 @@ $(document).ready(function(){
             change_class(this);
         });
 
-    $('#story-description, #story-title')
+    $('.story-description, .story-title')
         .on('focusout blur', function() {
             data_post(this);
         })
