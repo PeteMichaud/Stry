@@ -34,7 +34,7 @@ class Attachment < ActiveRecord::Base
   end
 
   def is_type? legal
-    legal.include? File.extname(file.path)
+    legal.include? File.extname(file.path)[1..4]
   end
 
 end
