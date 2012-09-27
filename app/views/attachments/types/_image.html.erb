@@ -1,0 +1,11 @@
+<%
+   dimensions = Paperclip::Geometry.from_file(image.path(:medium)) unless image.path.blank?
+   height = 300
+   height = dimensions.height.to_i if dimensions.present?
+%>
+<a href="<%= image.url %>"
+   class="attachment-thumb"
+   data-original-url="<%= image.url %>"
+   style="height:<%= height %>px">
+  <%= image_tag image.url(:medium) %>
+</a>
