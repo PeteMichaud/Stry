@@ -1,15 +1,7 @@
 <div id="story-header">
-  <textarea id="story-title" name='story[title]'
-            data-post-url='<%= story_path(@story) %>'
-            data-dirty="<%= @story.title %>"
-            placeholder="Enter Story Title..."><%= @story.title %></textarea>
-
-    <textarea class="story-description" name='story[description]'
-              data-post-url='<%= story_path(@story) %>'
-              data-dirty="<%= @story.description %>"
-              placeholder="Add Story Description..."><%= @story.description %></textarea>
-
-    <%= @story.table_of_contents %>
+  <%= @story.editable :title %>
+  <%= @story.editable :description %>
+  <%= @story.table_of_contents %>
 </div>
 
 <ul id="story-scene-list" data-story-id="<%= @story.id %>">
