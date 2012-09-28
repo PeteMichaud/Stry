@@ -18,11 +18,10 @@ movie script. The problem is that there are no tools that really do what I need.
 TODO
 ====
 
-* Better Attachment handling for video (right now it just links to the video)
-* Cross Browser Testing
-* Unit Test Suite
 * Rich Text Editing in Blocks
 * Provide interface for setting the narrative and gameplay intensity of a scene, and an intensity graph for the story
+* Cross Browser Testing
+* Unit Test Suite
 
 Installation
 ============
