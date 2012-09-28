@@ -38,7 +38,7 @@ div.jp-audio {
 div.jp-video-270p {
     width:480px;
 }
-div.jp-video-360p {
+div.jp-video-360p, div.jp-video-480p {
     width:640px;
 }
 div.jp-video-full {
@@ -464,6 +464,11 @@ div.jp-video-360p div.jp-video-play {
     margin-top:-360px;
     height:360px;
 }
+div.jp-video-480p div.jp-video-play {
+    margin-top:-480px;
+    height:480px;
+}
+
 div.jp-video-full div.jp-video-play {
     height:100%;
 }
