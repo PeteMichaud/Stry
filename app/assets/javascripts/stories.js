@@ -570,8 +570,8 @@ $(document).ready(function(){
                 swfPath: "/assets",
                 supplied: $(object).data('file-format'),
                 size: {
-                    width: "640px",
-                    height: "480px",
+                    width: $(object).data('video-width') + "px",
+                    height: $(object).data('video-height') + "px",
                     cssClass: "jp-video-480p"
                 }
 
