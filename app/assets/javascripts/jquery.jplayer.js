@@ -1837,8 +1837,16 @@
 			}
 
 			// Set the size of the jPlayer area.
-			this.element.css({'width': this.status.width, 'height': this.status.height});
-		},
+            if (this.options.supplied == 'mp3')
+            {
+                this.element.css({'width': this.status.width, 'height': this.status.height});
+            }
+            else
+            {
+                this.element.css({'width': "640px", 'height': this.status.height});
+            }
+
+        },
 		_addUiClass: function() {
 			if(this.ancestorJq.length) {
 				this.ancestorJq.addClass(this.status.cssClass);
