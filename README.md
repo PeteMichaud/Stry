@@ -31,4 +31,4 @@ Installation
 2. bundle install
 3. brew install imagemagick (for image attachment processing)
 4. brew install ffmpeg --use-clang (for video attachment processing)
-3. rake db:create db:migrate
+5. rake db:create db:migrate
