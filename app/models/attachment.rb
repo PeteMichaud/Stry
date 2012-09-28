@@ -23,7 +23,7 @@ class Attachment < ActiveRecord::Base
   end
 
   def is_video? type = nil
-    is_type? %w(mpg mpeg avi flv mov mp4 wmv), type
+    is_type? %w(mpg mpeg avi flv mov mp4 wmv m4v), type
   end
 
   #Gets paperclip processors based on file type
@@ -39,12 +39,11 @@ class Attachment < ActiveRecord::Base
   def file_styles
     if is_image? file_content_type
       {
-          :medium => "300x300>",
-          :thumb => "100x100>"
+          :medium => "300x300>"
       }
     elsif is_video? file_content_type
       {
-          :medium => { :geometry => "640x480", :format => 'flv' },
+          :original => { :geometry => "640x480>", :format => 'm4v' },
           :thumb => { :geometry => "300x300>", :format => 'jpg', :time => 10 }
       }
     else
