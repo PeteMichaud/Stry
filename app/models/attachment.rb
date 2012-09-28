@@ -51,6 +51,36 @@ class Attachment < ActiveRecord::Base
     end
   end
 
+  def image_dimensions style = :original
+    return nil unless is_image?
+    Paperclip::Geometry.from_file(file.path(style)) unless file.path(style).blank?
+  end
+
+  def video_meta style = :original
+    return nil unless is_video?
+    meta = {}
+    ffmpeg = IO.popen("ffmpeg -i \"#{File.expand_path(file.path(style))}\" 2>&1")
+    ffmpeg.each("\r") do |line|
+      if line =~ /((\d*)\s.?)fps,/
+        meta[:fps] = $1.to_i
+      end
+      # Matching lines like:
+      # Video: h264, yuvj420p, 640x480 [PAR 72:72 DAR 4:3], 10301 kb/s, 30 fps, 30 tbr, 600 tbn, 600 tbc
+      if line =~ /Video:(.*)/
+        v = $1.to_s.split(',')
+        size = v[2].strip!.split(' ').first
+        meta[:size] = size.to_s
+        meta[:width], meta[:height] = size.split('x')
+        meta[:aspect] = meta[:width].to_f / meta[:height].to_f
+      end
+      # Matching Duration: 00:01:31.66, start: 0.000000, bitrate: 10404 kb/s
+      if line =~ /Duration:(\s.?(\d*):(\d*):(\d*\.\d*))/
+        meta[:length] = $2.to_s + ":" + $3.to_s + ":" + $4.to_s
+      end
+    end
+    meta
+  end
+
   private
 
   def is_type? legal, type = nil
