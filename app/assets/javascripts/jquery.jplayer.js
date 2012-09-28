@@ -1837,7 +1837,7 @@
 			}
 
 			// Set the size of the jPlayer area.
-            if (this.options.supplied == 'mp3')
+            if (this.options.wmode == 'window') //window is what I set it to for audio
             {
                 this.element.css({'width': this.status.width, 'height': this.status.height});
             }
