@@ -1,8 +1,5 @@
 <li class="attachment" data-attachment-id="<%= attachment.id %>">
   <a class="delete-attachment-btn" href="#">&times;</a>
   <%= attachment.render %>
-  <textarea class="attachment-caption" name='attachment[caption]'
-            data-post-url='<%= attachment_path(attachment) %>'
-            data-dirty="<%= attachment.caption %>"
-            placeholder="Add Caption..."><%= attachment.caption %></textarea>
+  <%= attachment.editable :caption %>
 </li>
