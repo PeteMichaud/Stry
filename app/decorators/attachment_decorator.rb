@@ -9,7 +9,7 @@ class AttachmentDecorator < ApplicationDecorator
     elsif model.is_video?
       h.render :partial => 'attachments/types/video', :locals => { :attachment => self }
     else
-      h.render :partial => 'attachments/types/generic', :locals => { :file => file }
+      h.render :partial => 'attachments/types/file', :locals => { :file => file }
     end
   end
 end
