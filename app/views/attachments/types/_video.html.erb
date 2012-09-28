@@ -1,3 +1,6 @@
+<%
+    video_meta = attachment.video_meta
+%>
 <div class="video-container">
   <a href="#video-modal-<%= attachment.id %>" class="video-thumb" data-toggle="modal">
     <i class="icon-film"></i>
@@ -11,11 +14,10 @@
       <div id="jquery_jplayer_<%= attachment.id %>" class="video-player jp-jplayer"
            data-file-format="<%= attachment.file.file_type %>"
            data-file-path="<%= attachment.file.url %>"
-           data-thumb-path="<%= attachment.file.url(:thumb) %>"></div>
+           data-thumb-path="<%= attachment.file.url(:thumb) %>"
+           data-video-width="<%= video_meta[:width] %>"
+           data-video-height="<%= video_meta[:height] %>"></div>
       <div class="jp-gui">
-        <div class="jp-video-play">
-          <a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
-        </div>
         <div class="jp-interface">
           <div class="jp-progress">
             <div class="jp-seek-bar">
