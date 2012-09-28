@@ -72,6 +72,7 @@ $(document).ready(function(){
         $('li[data-block-id="' + current_block_id + '"] ul.block-attachment-list li.add-attachment')
             .before($attachment);
         activate_autogrow($('textarea', $attachment));
+        activate_jplayer($('.audio-player', $attachment));
         $attachment_modal.modal('hide');
         //show $attachment on modal.hidden event (See above this function)
     }
@@ -394,8 +395,8 @@ $(document).ready(function(){
         });
     }
 
-   function activate_block_sort($obj)
-   {
+    function activate_block_sort($obj)
+    {
        $obj.sortable({
            axis: 'y',
            handle: '.sorting-handle',
@@ -529,18 +530,22 @@ $(document).ready(function(){
 
     function activate_jplayer($obj)
     {
-        var formats_obj = JSON.parse('{ "' + $obj.data('file-format') + '": "' + $obj.data('file-path') + '" }');
+        $obj.each(function(i, object){
 
-        $obj.jPlayer({
-            ready: function () {
-                $obj.jPlayer("setMedia",
-                    formats_obj
-                );
-            },
-            swfPath: "/assets",
-            supplied: $obj.data('file-format'),
-            wmode: "window"
+            $(object).jPlayer({
+                ready: function () {
+                    $(this).jPlayer("setMedia",
+                        JSON.parse('{ "' + $(this).data('file-format') + '": "' + $(this).data('file-path') + '" }')
+                    );
+                },
+                cssSelectorAncestor: "#jp-interface-" + $(object).parents('.attachment').data('attachment-id'),
+                swfPath: "/assets",
+                supplied: $(object).data('file-format'),
+                wmode: "window"
+            });
+
         });
+
     }
 
 });
