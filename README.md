@@ -29,5 +29,6 @@ Installation
 
 1. Clone the repo
 2. bundle install
-3. brew install imagemagick (if you don't have imagemagick installed)
+3. brew install imagemagick (for image attachment processing)
+4. brew install ffmpeg --use-clang (for video attachment processing)
 3. rake db:create db:migrate
