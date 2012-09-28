@@ -500,8 +500,10 @@ div.jp-jplayer {
     height:0px;
 }
 
-div.jp-jplayer {
-    background-color: #000000;
+div.jp-jplayer.video-player {
+    background-color: #000;
+    text-align:center;
+    padding:15px 0;
 }
 
 
