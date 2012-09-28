@@ -1,9 +1,9 @@
 <div class="audio-container">
     <div class="audio-player" class="jp-jplayer"
-         data-file-format="<%= audio.file_type %>"
-         data-file-path="<%= audio.url %>"></div>
+         data-file-format="<%= attachment.file.file_type %>"
+         data-file-path="<%= attachment.file.url %>"></div>
 
-    <div id="jp_container_1" class="jp-audio">
+    <div id="jp-interface-<%= attachment.id %>" class="jp-audio">
       <div class="jp-type-single">
         <div class="jp-gui jp-interface">
           <ul class="jp-controls">
@@ -28,7 +28,7 @@
         </div>
         <div class="jp-title">
           <ul>
-            <li><%= audio.pretty_name %></li>
+            <li><%= attachment.file.pretty_name %></li>
           </ul>
         </div>
         <div class="jp-no-solution">
