@@ -72,7 +72,8 @@ $(document).ready(function(){
         $('li[data-block-id="' + current_block_id + '"] ul.block-attachment-list li.add-attachment')
             .before($attachment);
         activate_autogrow($('textarea', $attachment));
-        activate_jplayer($('.audio-player', $attachment));
+        activate_jplayer_audio($('.audio-player', $attachment));
+        activate_jplayer_video($('.video-player', $attachment));
         $attachment_modal.modal('hide');
         //show $attachment on modal.hidden event (See above this function)
     }
@@ -223,7 +224,6 @@ $(document).ready(function(){
                 {
                     $('.block-attachment-list',$block).prepend($attachment_with_controls);
                 }
-                activate_jplayer($('.audio-player',$attachment_with_controls));
             }
         });
         return false;
@@ -309,9 +309,15 @@ $(document).ready(function(){
             data_post(this);
         })
 
-    //Audio Attachments
+    //Audio/Video Attachments
 
-    activate_jplayer($(".audio-player"));
+    activate_jplayer_audio($(".audio-player"));
+    activate_jplayer_video($(".video-player"));
+
+
+    $story.on('hidden', '.video-modal', function(){
+        $('.video-player').jPlayer('pause');
+    });
 
     //Helper Functions
 
@@ -528,7 +534,7 @@ $(document).ready(function(){
         }
     }
 
-    function activate_jplayer($obj)
+    function activate_jplayer_audio($obj)
     {
         $obj.each(function(i, object){
 
@@ -542,6 +548,33 @@ $(document).ready(function(){
                 swfPath: "/assets",
                 supplied: $(object).data('file-format'),
                 wmode: "window"
+            });
+
+        });
+
+    }
+
+    function activate_jplayer_video($obj)
+    {
+        $obj.each(function(i, object){
+
+            $(object).jPlayer({
+                ready: function () {
+                    var test = JSON.parse('{ "' + $(this).data('file-format') + '": "' + $(this).data('file-path') + '", "poster":"' + $(this).data('thumb-path') + '" }');
+
+                    $(this).jPlayer("setMedia",
+                        JSON.parse('{ "' + $(this).data('file-format') + '": "' + $(this).data('file-path') + '", "poster":"' + $(this).data('thumb-path') + '" }')
+                    );
+                },
+                cssSelectorAncestor: "#jp_container_" + $(object).parents('.attachment').data('attachment-id'),
+                swfPath: "/assets",
+                supplied: $(object).data('file-format'),
+                size: {
+                    width: "640px",
+                    height: "480px",
+                    cssClass: "jp-video-480p"
+                }
+
             });
 
         });
