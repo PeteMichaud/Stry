@@ -59,10 +59,4 @@ class Attachment < ActiveRecord::Base
     legal.include? type
   end
 
-  def new_file_is_image?
-    %w(jpg jpeg gif png tif tiff bmp).map{|ext| "image/#{ext}" }.include?(file_content_type)
-  end
-
-
-
 end
