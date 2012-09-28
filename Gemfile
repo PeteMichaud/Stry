@@ -47,4 +47,4 @@ gem 'bootstrap-wysihtml5-rails'
 gem "paperclip"
 gem 'remotipart'
 gem 'draper'
-gem "paperclip-ffmpeg"
+gem "paperclip-ffmpeg", github: 'PeteMichaud/paperclip-ffmpeg'
