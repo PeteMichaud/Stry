@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/PeteMichaud/paperclip-ffmpeg.git
-  revision: 5db2aa0871cff4a2789184610b24b2d17aa68ba7
+  revision: 8baf05bf1bd3c5e33e53bda6a054036752e21857
   specs:
     paperclip-ffmpeg (0.9.1)
       paperclip (>= 2.5.2)
