@@ -45,7 +45,7 @@ class Attachment < ActiveRecord::Base
     elsif is_video? file_content_type
       {
           :medium => { :geometry => "640x480", :format => 'flv' },
-          :thumb => { :geometry => "300x300#", :format => 'jpg', :time => 10 }
+          :thumb => { :geometry => "300x300>", :format => 'jpg', :time => 10 }
       }
     else
       { }
