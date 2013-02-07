@@ -21,6 +21,7 @@ TODO
 * Provide interface for setting the narrative and gameplay intensity of a scene, and an intensity graph for the story
 * View-only Mode for Public access to stories
 * Cross Browser Testing
+* wsyihat contenteditable divs sometime reflow text on focus. Figure out why, and stop it.
 * Unit Test Suite
 
 Installation
