@@ -8,7 +8,7 @@ class Block < ActiveRecord::Base
   validates :scene, :presence => true
 
   def insert attachment, after_id = nil
-    insert_object attachments, attachment, after_id
+    insert_object attachments.scoped, attachment, after_id
   end
 
   def remove attachment

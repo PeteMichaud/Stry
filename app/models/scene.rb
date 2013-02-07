@@ -8,7 +8,7 @@ class Scene < ActiveRecord::Base
   validates :story, :presence => true
 
   def insert block, after_id = nil
-    insert_object blocks, block, after_id
+    insert_object blocks.scoped, block, after_id
   end
 
   def remove block
