@@ -20,6 +20,10 @@ $(document).ready(function(){
 
     activate_autogrow($('textarea'));
 
+    //Turn on WYSIWYG
+
+    activate_wysiwyg($('.block-content'));
+
     // Attachment Related Code
 
     $story
@@ -292,6 +296,7 @@ $(document).ready(function(){
 
     // Post on Blur
 
+
     .on('focusout blur','input[data-post-url], textarea[data-post-url]',function() {
             data_post(this);
             if ($(this).hasClass('scene-title'))
@@ -299,10 +304,13 @@ $(document).ready(function(){
                 update_toc(this);
             }
         })
-        .on('change','select[data-post-url]',function() {
-            data_post(this);
-            change_class(this);
-        });
+    .on('focusout blur','div[contenteditable]',function() {
+        data_post(this);
+    })
+    .on('change','select[data-post-url]',function() {
+        data_post(this);
+        change_class(this);
+    });
 
     $('.story-description, .story-title')
         .on('focusout blur', function() {
@@ -343,6 +351,8 @@ $(document).ready(function(){
         $('div.column','.block').prepend(function(){
             return build_this_klass_select(html, $(this));
         });
+
+        change_class($('select[name="block[klass]"]'));
     }
 
     function build_this_klass_select(html, $object)
@@ -399,6 +409,65 @@ $(document).ready(function(){
             complete: autogrow_complete,
             short: true
         });
+    }
+
+    function activate_wysiwyg($obj)
+    {
+        $obj.each(function(i, txt){
+            build_editor($(txt));
+        });
+    }
+
+    function build_editor($attach_to) {
+        var $editor = WysiHat.Editor.attach($attach_to);
+
+        var $toolbar = $('<div class="editor_toolbar"></div>');
+
+        var $bold_button = $('<a href="#" class="bold"><i class="icon-bold"></i></a>');
+        $bold_button.click(function(e) {
+            $editor.boldSelection();
+            return false;
+        });
+        var $italic_button = $('<a href="#" class="italic"><i class="icon-italic"></i></a>');
+        $italic_button.click(function(e) {
+            $editor.italicSelection();
+            return false;
+        });
+        var $link_button = $('<a href="#" class="link"><i class="icon-link"></i></a>');
+        $link_button.click(function(e) {
+            $editor.underlineSelection();
+            return false;
+        });
+
+        $toolbar
+            .append($bold_button)
+            .append($italic_button)
+            .append($link_button);
+
+        $editor.before($toolbar);
+
+        $editor
+            .bind('wysihat:cursormove', function(e) {
+                if ($editor.boldSelected())
+                    boldButton.addClass('selected');
+                else
+                    boldButton.removeClass('selected');
+            })
+            .bind('wysihat:cursormove', function(e) {
+                if ($editor.underlineSelected())
+                    underlineButton.addClassName('selected');
+                else
+                    underlineButton.removeClassName('selected');
+            })
+            .bind('wysihat:cursormove', function(e) {
+                if ($editor.italicSelected())
+                    italicButton.addClassName('selected');
+                else
+                    italicButton.removeClassName('selected');
+            })
+            .attr('name', $attach_to.attr('name'))
+            .attr('data-post-url', $attach_to.attr('data-post-url'))
+            .attr('data-dirty', $attach_to.attr('data-dirty'));
     }
 
     function activate_block_sort($obj)
@@ -468,8 +537,13 @@ $(document).ready(function(){
 
     function change_class(object)
     {
-        $sel = $(object);
-        $sel.parent().attr('class', $sel.val() + ' block')
+        $(object).each(function(i, o){
+            $sel = $(o);
+            $block = $sel.parents('.block');
+            $block.attr('class', $sel.val() + ' block');
+            var $editorBody = $('iframe', $block).contents().find('body');
+            $editorBody.attr('class', $sel.val());
+        });
     }
 
     function data_post(object)
@@ -482,6 +556,10 @@ $(document).ready(function(){
             case 'checkbox' :
                 dirty_value = $(object).attr('data-dirty') == 'true' ? true : false;
                 current_value = $(object).attr('checked') ? true : false;
+                break;
+            case undefined:
+                dirty_value = $(object).attr('data-dirty');
+                current_value = $(object).html();
                 break;
             default :
                 dirty_value = $(object).attr('data-dirty');
@@ -511,15 +589,8 @@ $(document).ready(function(){
                 data: data,
                 error: function(xhr) {
                     var err = '';
-                    try
-                    {
-                        err = JSON.parse(xhr.responseText)[object_key][0];
-                    }
-                    catch(ex)
-                    {
-                        err = xhr.responseText;
-                    }
-
+                    try { err = JSON.parse(xhr.responseText)[object_key][0]; }
+                    catch(ex) { err = xhr.responseText; }
                     $(object)
                         .addClass('error')
                         .attr('title', err);
