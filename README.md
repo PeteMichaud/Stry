@@ -18,8 +18,6 @@ movie script. The problem is that there are no tools that really do what I need.
 TODO
 ====
 
-* Rich Text Editor needs HTML mode so I can fix things if necessary
-* Rich Text Editor Controls need to disappear for all but the active block, and they need to look better when visible
 * Provide interface for setting the narrative and gameplay intensity of a scene, and an intensity graph for the story
 * View-only Mode for Public access to stories
 * Cross Browser Testing
