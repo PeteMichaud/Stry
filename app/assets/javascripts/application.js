@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.migrate.1.1.0
 //= require jquery.ui.sortable
 //= require jquery.remotipart
 //= require twitter/bootstrap
