@@ -306,6 +306,19 @@ $(document).ready(function(){
         })
     .on('focusout blur','div[contenteditable]',function() {
         data_post(this);
+        $(this).siblings('.editor_toolbar').fadeOut('fast');
+    })
+    .on('focusout blur','textarea[data-post-url].block-content',function() {
+        var $toolbar = $(this).siblings('.editor_toolbar');
+        $toolbar.fadeOut('fast', function(){ $('a',$toolbar).show(); });
+    })
+    .on('focus','div[contenteditable]',function() {
+        $(this).siblings('.editor_toolbar').fadeIn('fast');
+    })
+    .on('focus','textarea[data-post-url].block-content',function() {
+        var $toolbar = $(this).siblings('.editor_toolbar');
+        $('a',$toolbar).not(':last-child').hide();
+        $toolbar.fadeIn('fast');
     })
     .on('change','select[data-post-url]',function() {
         data_post(this);
@@ -401,7 +414,7 @@ $(document).ready(function(){
 
     function autogrow_complete($textarea)
     {
-        $textarea.height(Math.max($textarea.height(),24));
+        $textarea.height(Math.max($textarea.height(),100/*24*/));
         ensure_block_height($textarea.parents('.column').next('.block-attachment-list'));
     }
 
@@ -449,7 +462,7 @@ $(document).ready(function(){
         });
         var $html_button = $('<a href="#" class="html" title="Edit HTML"><i class="icon-cogs"></i></a>');
         $html_button.click(function(e) {
-            $editor.editHTML($attach_to, $editor);
+            $editor.editHTML($attach_to, $editor).focus();
             return false;
         });
 
