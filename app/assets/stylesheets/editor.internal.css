@@ -1,0 +1,20 @@
+.editor {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height:1.6em;
+    padding:5px 0 0 20px;
+}
+
+.playable {
+    color:#555;
+}
+
+.notes {
+    color:#777;
+}
+.scripted {
+    color:#006F19;
+}
+.cut_scene {
+    color:#55006F;
+}
