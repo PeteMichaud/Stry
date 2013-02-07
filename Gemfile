@@ -43,7 +43,6 @@ gem 'jquery-ui-rails'
 gem 'devise'
 gem 'enum_column3'
 gem 'thin'
-gem 'bootstrap-wysihtml5-rails'
 gem "paperclip"
 gem 'remotipart'
 gem 'draper'
