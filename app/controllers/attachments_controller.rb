@@ -6,7 +6,7 @@ class AttachmentsController < ApplicationController
 
   # POST /attachments
   def create
-    @attachment = Attachment.new(params[:attachment]).decorator
+    @attachment = Attachment.new(params[:attachment]).decorate
 
     respond_to do |format|
       if @attachment.block.insert @attachment, params[:previous_attachment]
