@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    @stories = Story.where(:author_id => current_user.id)
+    @stories = Story.where(:author_id => current_user.id).decorate
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class StoriesController < ApplicationController
   # GET /stories/1
   # GET /stories/1.json
   def show
-    @attachment = Attachment.new.decorator
+    @attachment = Attachment.new.decorate
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,16 +24,10 @@ class StoriesController < ApplicationController
   # GET /stories/new
   # GET /stories/new.json
   def new
-    @story.title = ''
-    @story.author = current_user
-
-    @story.scenes << Scene.new
-    @story.scenes.first.blocks << Block.new
-
-    @story.save
+    @story = Story.new_blank_by current_user
 
     respond_to do |format|
-      format.html { redirect_to @story, notice: 'Story was successfully created.' }
+      format.html { redirect_to story_path(@story), notice: 'Story was successfully created.' }
     end
   end
 
