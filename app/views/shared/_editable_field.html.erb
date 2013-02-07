@@ -1,4 +1,4 @@
-<textarea class="<%= type %>-<%= prop %>" name='<%= type %>[<%= prop %>]'
+<textarea id="<%= object.id %>" class="<%= type %>-<%= prop %>" name='<%= type %>[<%= prop %>]'
           data-post-url='<%= send( "#{type}_path", object ) %>'
           data-dirty="<%= object.send(prop) %>"
           placeholder="Enter <%= type.capitalize %> <%= prop.capitalize %>..."><%= object.send(prop) %></textarea>
