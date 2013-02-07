@@ -815,11 +815,13 @@ WysiHat.Commands = (function(window) {
     {
       $editor.hide();
       $raw_field.val($editor.html()).show();
+      return $raw_field;
     }
     else
     {
         $raw_field.hide();
         $editor.html(WysiHat.Formatting.getBrowserMarkupFrom($raw_field.val())).show();
+        return $editor;
     }
   }
 
