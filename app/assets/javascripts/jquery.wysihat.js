@@ -26,7 +26,6 @@ WysiHat.Editor = {
     $textarea.before($editArea);
     $textarea.hide();
 
-
     return $editArea;
   }
 };
@@ -811,6 +810,19 @@ WysiHat.Commands = (function(window) {
     this.execCommand('insertImage', false, url);
   }
 
+  function editHTML($raw_field, $editor) {
+    if ($editor.is(':visible'))
+    {
+      $editor.hide();
+      $raw_field.val($editor.html()).show();
+    }
+    else
+    {
+        $raw_field.hide();
+        $editor.html(WysiHat.Formatting.getBrowserMarkupFrom($raw_field.val())).show();
+    }
+  }
+
   function insertHTML(html) {
     if ($.browser.msie) {
       var range = window.document.selection.createRange();
@@ -884,6 +896,7 @@ WysiHat.Commands = (function(window) {
      toggleUnorderedList:      toggleUnorderedList,
      insertUnorderedList:      insertUnorderedList,
      unorderedListSelected:    unorderedListSelected,
+     editHTML:                 editHTML,
      insertImage:              insertImage,
      insertHTML:               insertHTML,
      execCommand:              execCommand,
@@ -1205,7 +1218,7 @@ WysiHat.Formatting = (function() {
       if ($.browser.webkit || $.browser.mozilla) {
         convertStrongsToSpans();
         convertEmsToSpans();
-        convertBreaksToPs();
+        //convertBreaksToPs();
       } else if ($.browser.msie || $.browser.opera) {
         convertDivsToParagraphs();
       }
