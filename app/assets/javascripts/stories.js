@@ -435,7 +435,14 @@ $(document).ready(function(){
         });
         var $link_button = $('<a href="#" class="link"><i class="icon-link"></i></a>');
         $link_button.click(function(e) {
-            $editor.underlineSelection();
+            if ($editor.linkSelected()) {
+                if (confirm("Remove link?"))
+                    $editor.unlinkSelection();
+            } else {
+                var value = prompt("Enter a URL", "http://www.google.com/");
+                if (value)
+                    $editor.linkSelection(value);
+            }
             return false;
         });
 
