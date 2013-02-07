@@ -382,6 +382,8 @@ $(document).ready(function(){
 
     function ensure_block_height($attachment_list)
     {
+        if (!$attachment_list.length) { return; }
+
         $block = $attachment_list.parents('.block');
         start_height = $block.height();
         $block.css('min-height','');
@@ -400,7 +402,7 @@ $(document).ready(function(){
     function autogrow_complete($textarea)
     {
         $textarea.height(Math.max($textarea.height(),24));
-        ensure_block_height($textarea.parents('.block-attachment-list'));
+        ensure_block_height($textarea.parents('.column').next('.block-attachment-list'));
     }
 
     function activate_autogrow($obj)
@@ -423,17 +425,17 @@ $(document).ready(function(){
 
         var $toolbar = $('<div class="editor_toolbar"></div>');
 
-        var $bold_button = $('<a href="#" class="bold"><i class="icon-bold"></i></a>');
+        var $bold_button = $('<a href="#" class="bold" title="Bold"><i class="icon-bold"></i></a>');
         $bold_button.click(function(e) {
             $editor.boldSelection();
             return false;
         });
-        var $italic_button = $('<a href="#" class="italic"><i class="icon-italic"></i></a>');
+        var $italic_button = $('<a href="#" class="italic" title="Italic"><i class="icon-italic"></i></a>');
         $italic_button.click(function(e) {
             $editor.italicSelection();
             return false;
         });
-        var $link_button = $('<a href="#" class="link"><i class="icon-link"></i></a>');
+        var $link_button = $('<a href="#" class="link" title="Hyperlink"><i class="icon-link"></i></a>');
         $link_button.click(function(e) {
             if ($editor.linkSelected()) {
                 if (confirm("Remove link?"))
@@ -445,11 +447,18 @@ $(document).ready(function(){
             }
             return false;
         });
+        var $html_button = $('<a href="#" class="html" title="Edit HTML"><i class="icon-cogs"></i></a>');
+        $html_button.click(function(e) {
+            $editor.editHTML($attach_to, $editor);
+            return false;
+        });
+
 
         $toolbar
             .append($bold_button)
             .append($italic_button)
-            .append($link_button);
+            .append($link_button)
+            .append($html_button);
 
         $editor.before($toolbar);
 
@@ -471,6 +480,9 @@ $(document).ready(function(){
                     italicButton.addClassName('selected');
                 else
                     italicButton.removeClassName('selected');
+            })
+            .bind('wysihat:change', function(e) {
+                ensure_block_height($editor.parents('.block-attachment-list'));
             })
             .attr('name', $attach_to.attr('name'))
             .attr('data-post-url', $attach_to.attr('data-post-url'))
