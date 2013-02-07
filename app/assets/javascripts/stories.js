@@ -414,7 +414,7 @@ $(document).ready(function(){
 
     function autogrow_complete($textarea)
     {
-        $textarea.height(Math.max($textarea.height(),100/*24*/));
+        $textarea.height(Math.max($textarea.height(),24));
         ensure_block_height($textarea.parents('.column').next('.block-attachment-list'));
     }
 
