@@ -382,7 +382,7 @@ $(document).ready(function(){
         $tpl = $(html);
         var block_klass = $block.attr('class').substring(0, $block.attr('class').indexOf(' '));
         $('option[value="' + block_klass + '"]', $tpl)
-            .attr('selected', 'selected');
+            .prop('selected', true);
 
         $tpl
             .attr(
