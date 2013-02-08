@@ -101,13 +101,14 @@ body{
   font-size: 2em;
   font-weight: 900;
   height:45px;
+  color:#555;
 }
 
 h2{
   font-size: 1.5em;
 }
 
-textarea{
+textarea, .readable{
   overflow:hidden;
   border:0;
   width:90%;
@@ -150,10 +151,14 @@ textarea{
     .delete-scene-btn{
       .delete-btn;
     }
-    textarea.scene-title{
+    textarea.scene-title {
+      height:2em;
+    }
+    .scene-title{
+      font-weight: 500;
+      color:#555;
       font-size:1.5em;
       line-height:2em;
-      height:2em;
       border:1px solid @column_background;
       width:90%;
       display:block;
@@ -297,24 +302,32 @@ textarea{
         font-size: 16px;
         background: @column_background;
       }
+      .block-type {
+        color: #555;
+        margin: 25px 0 10px 0;
+        padding:2px 0;
+        font-weight: bold;
+        font-family: Georgia, serif;
+        font-size: 16px;
+      }
 
       .playable {
-        textarea, select {
+        textarea, select, .block-type {
           color:#555;
         }
       }
       .notes {
-        textarea, select {
+        textarea, select, .block-type {
           color:#777;
         }
       }
       .scripted {
-        textarea, select {
+        textarea, select, .block-type {
           color:#006F19;
         }
       }
       .cut_scene {
-        textarea, select {
+        textarea, select, .block-type {
           color:#55006F;
         }
       }
