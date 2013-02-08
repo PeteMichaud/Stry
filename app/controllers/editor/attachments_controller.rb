@@ -1,4 +1,4 @@
-class AttachmentsController < ApplicationController
+class Editor::AttachmentsController < EditorController
 
   #GET /attachments/new
   def new
@@ -10,7 +10,7 @@ class AttachmentsController < ApplicationController
 
     respond_to do |format|
       if @attachment.block.insert @attachment, params[:previous_attachment]
-        format.html { render 'attachments/show', layout: false, status: 200 }
+        format.html { render 'editor/attachments/show', layout: false, status: 200 }
         format.js
       else
         format.html { render json: @attachment.errors, status: :unprocessable_entity }

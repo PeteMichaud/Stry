@@ -1,5 +1,5 @@
 <li class="attachment" data-attachment-id="<%= attachment.id %>">
-  <a class="delete-attachment-btn" href="#">&times;</a>
+  <% if edit_mode? %><a class="delete-attachment-btn" href="#">&times;</a><% end %>
   <%= attachment.render %>
-  <%= attachment.editable :caption %>
+  <%= attachment.show :caption, edit_mode? %>
 </li>

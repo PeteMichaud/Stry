@@ -1,11 +1,11 @@
-class BlocksController < ApplicationController
+class Editor::BlocksController < EditorController
   # POST /blocks.json
   def create
     @block = Block.new(params[:block])
 
     respond_to do |format|
       if @block.scene.insert @block, params[:previous_block]
-        format.html { render 'blocks/show', layout: false, status: 200 }
+        format.html { render 'editor/blocks/show', layout: false, status: 200 }
       else
         format.html { render json: @block.errors, status: :unprocessable_entity }
       end
@@ -38,7 +38,7 @@ class BlocksController < ApplicationController
   def klass_select_markup
     @block = Block.new
     respond_to do |format|
-        format.html { render 'blocks/klass_select', layout: false, status: 200 }
+        format.html { render 'editor/blocks/klass_select', layout: false, status: 200 }
     end
   end
 

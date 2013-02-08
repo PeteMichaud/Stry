@@ -6,15 +6,22 @@
         <table class="table">
           <tr>
             <th>Title</th>
+            <th>Actions</th>
           </tr>
 
         <% @stories.each do |story| %>
           <tr>
             <td><%= link_to story.title, story %></td>
+            <td>
+              <%= link_to 'Destroy', story, confirm: 'Are you sure?', method: :delete %>
+            </td>
           </tr>
         <% end %>
         </table>
 
+        <br />
+
+        <%= link_to 'New Story', new_editor_story_path %>
     </div>
   </div>
 </div>

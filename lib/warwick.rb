@@ -62,7 +62,7 @@ module Warwick
     return unless @@autoload_resource
 
     resource_class, id_symbol, variable_name = get_resource_data(controller_name.singularize)
-    create_class_variable(id_symbol, resource_class, variable_name) if resource_class
+    create_class_variable(id_symbol, resource_class, variable_name) if resource_class rescue #can't create object, do nothing
 
     parent_ids.each do |parent_id_symbol|
       resource_class, _, variable_name = get_resource_data(parent_id_symbol[0...-3])

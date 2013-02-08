@@ -26,4 +26,8 @@ module ApplicationHelper
            }
   end
 
+  def edit_mode?
+    false
+  end
+
 end
