@@ -18,7 +18,6 @@ movie script. The problem is that there are no tools that really do what I need.
 TODO
 ====
 
-* View-only Mode for Public access to stories
 * Provide interface for setting the narrative and gameplay intensity of a scene, and an intensity graph for the story
 * Cross Browser Testing
 * wsyihat contenteditable divs sometime reflow text on focus. Figure out why, and stop it.
