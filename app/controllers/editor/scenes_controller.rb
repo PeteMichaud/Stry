@@ -1,11 +1,11 @@
-class ScenesController < ApplicationController
+class Editor::ScenesController < EditorController
   # POST /scenes.json
   def create
     @scene = Scene.new(params[:scene])
 
     respond_to do |format|
       if @scene.story.insert @scene, params[:previous_scene]
-        format.html { render 'scenes/show', layout: false, status: 200 }
+        format.html { render 'editor/scenes/show', layout: false, status: 200 }
       else
         format.html { render json: @scene.errors, status: :unprocessable_entity }
       end
