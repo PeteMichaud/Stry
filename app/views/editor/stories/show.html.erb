@@ -1,6 +1,6 @@
-<div id="story-header">
-  <%= @story.editable :title %>
-  <%= @story.editable :description %>
+<div id="story-header" class="<%= "edit_mode" if edit_mode? %>">
+  <%= @story.show :title, edit_mode? %>
+  <%= @story.show :description, edit_mode? %>
   <%= @story.table_of_contents %>
 </div>
 
@@ -8,8 +8,8 @@
   <% @story.scenes.each do |scene| %>
     <%= render :partial => 'shared/scene', :locals => { :scene => scene } %>
   <% end %>
-  <%= add_button :scene %>
+  <%= add_button :scene if edit_mode? %>
 </ul>
 
-<%= render :partial => 'shared/attachment_modal' %>
+<%= render :partial => 'shared/attachment_modal' if edit_mode? %>
 <%= render :partial => 'shared/picture_modal' %>
