@@ -5,11 +5,21 @@
   <% end %>
   <%= scene.show :title, edit_mode? %>
 
-<%
-  #<div class="intensity">
-  #    (<%= scene.narrative_intensity >, <%= scene.gameplay_intensity >)
-  #</div>
-%>
+  <div class="intensity">
+    <label>Narrative:</label> <div class="narrative" data-start-value="<%= scene.narrative_intensity %>">
+      <input type="hidden"
+             name="scene[narrative_intensity]"
+             data-post-url="<%= editor_scene_path(scene) %>"
+             data-dirty="<%= scene.narrative_intensity %>" />
+    </div>
+    <label>Gameplay:</label> <div class="gameplay" data-start-value="<%= scene.gameplay_intensity %>">
+      <input type="hidden"
+             name="scene[gameplay_intensity]"
+             data-post-url="<%= editor_scene_path(scene) %>"
+             data-dirty="<%= scene.gameplay_intensity %>" />
+    </div>
+  </div>
+
   <div class="scene-purpose">Scene Purpose</div>
   <%= scene.show :notes, edit_mode? %>
 
