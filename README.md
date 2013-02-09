@@ -18,8 +18,9 @@ movie script. The problem is that there are no tools that really do what I need.
 TODO
 ====
 
-* Provide interface for setting the narrative and gameplay intensity of a scene, and an intensity graph for the story
+* Make Pretty Graph of Intesity
 * Cross Browser Testing
+* Change "sequence" attribute to "order_by" for compatibility with postgres
 * wsyihat contenteditable divs sometime reflow text on focus. Figure out why, and stop it.
 * Unit Test Suite
 
