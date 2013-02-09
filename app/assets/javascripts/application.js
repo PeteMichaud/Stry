@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.migrate.1.1.0
 //= require jquery.ui.sortable
+//= require jquery.ui.slider
 //= require jquery.remotipart
 //= require twitter/bootstrap
 //= require_tree .
