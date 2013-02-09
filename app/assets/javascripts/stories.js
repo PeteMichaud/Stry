@@ -21,12 +21,15 @@ $(document).ready(function(){
         activate_autogrow($('textarea'));
 
         activate_wysiwyg($('.block-content'));
+
+        activate_intensity_sliders(true);
     }
     else
     {
         $('.block-attachment-list').each(function(){
             ensure_block_height($(this));
         });
+        activate_intensity_sliders(false);
     }
     // Attachment Related Code
 
@@ -592,29 +595,30 @@ $(document).ready(function(){
 
     function data_post(object)
     {
+        var $object = $(object);
         var dirty_value = null;
         var current_value = null;
 
         // get the original and current values based on input type -- used to determine if we are dirty
         switch (object.type) {
             case 'checkbox' :
-                dirty_value = $(object).attr('data-dirty') == 'true' ? true : false;
-                current_value = $(object).attr('checked') ? true : false;
+                dirty_value = $object.attr('data-dirty') == 'true' ? true : false;
+                current_value = $object.attr('checked') ? true : false;
                 break;
             case undefined:
-                dirty_value = $(object).attr('data-dirty');
-                current_value = $(object).html();
+                dirty_value = $object.attr('data-dirty');
+                current_value = $object.html();
                 break;
             default :
-                dirty_value = $(object).attr('data-dirty');
-                current_value = $(object).val();
+                dirty_value = $object.attr('data-dirty');
+                current_value = $object.val();
                 break;
         }
 
         // If we are dirty do something, else ignore
         if (current_value != dirty_value) {
             // Get the target url and name
-            var target_name = $(object).attr('name');
+            var target_name = $object.attr('name');
 
             // Get the object type (since this can be anything) and the key that's being changed
             var object_type = target_name.substr(0,target_name.indexOf('['));
@@ -628,19 +632,19 @@ $(document).ready(function(){
             // Okay now do the put
             $.ajax({
                 type: 'PUT',
-                url: $(object).attr('data-post-url'),
+                url: $object.attr('data-post-url'),
                 dataType: 'json',
                 data: data,
                 error: function(xhr) {
                     var err = '';
                     try { err = JSON.parse(xhr.responseText)[object_key][0]; }
                     catch(ex) { err = xhr.responseText; }
-                    $(object)
+                    $object
                         .addClass('error')
                         .attr('title', err);
                 },
                 success: function () {
-                    $(object)
+                    $object
                         .attr('data-dirty', current_value)
                         .removeClass('error')
                         .attr('title', '');
@@ -694,6 +698,27 @@ $(document).ready(function(){
 
         });
 
+    }
+
+    function activate_intensity_sliders(edit_mode) {
+
+
+        $('.narrative, .gameplay').each(function(i, obj){
+            $(obj).slider({
+                range: "min",
+                value: $(obj).data('start-value'),
+                min: 0,
+                max: 127,
+                disabled: !edit_mode,
+                stop: function( event, ui ) {
+                    if (edit_mode) {
+                        $hidden = $("input[type='hidden']", this);
+                        $hidden.val(ui.value);
+                        data_post($hidden[0]);
+                    }
+                }
+            });
+        });
     }
 
 });
